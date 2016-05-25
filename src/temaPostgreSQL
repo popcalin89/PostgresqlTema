@@ -1,37 +1,37 @@
-1. Sa se afiseze toate postarile lui Calin
+--1. Sa se afiseze toate postarile lui Calin
     select id_user, username, mesaj
     from "user"
     join "postare"
     on "user".id = "postare".id_user
-    where username = 'Calin'
+    where username = 'Calin';
 
-    (or if you know the id user)...
+--  (or if you know the id user)...
     select mesaj from "postare" where id_user = 1;
 
-2. Sa se afiseze toti userii
-    select username from "user"
+--2. Sa se afiseze toti userii
+    select username from "user";
 
-3. Sa se afiseze toti userii care nu sunt blocati
-    select username from "user" where blocat = false
+--3. Sa se afiseze toti userii care nu sunt blocati
+    select username from "user" where blocat = false;
 
-4. Sa se afiseze userul cu varsta cea mai mica
-    select username, varsta from "user" where varsta = (select MIN(varsta) from "user")
+--4. Sa se afiseze userul cu varsta cea mai mica
+    select username, varsta from "user" where varsta = (select MIN(varsta) from "user");
 
-5. Sa se afiseze userii cu varsta intre 23 si 33 de ani , ordonati dupa varsta
+--5. Sa se afiseze userii cu varsta intre 23 si 33 de ani , ordonati dupa varsta
     select username, varsta from "user" where (varsta between 23 and 33)
-    order by varsta ASC
+    order by varsta ASC;
 
-6. sa se afizeze media varstei userilor blocati
-    select AVG(varsta) from "user" where blocat=true
+--6. sa se afizeze media varstei userilor blocati
+    select AVG(varsta) from "user" where blocat=true;
 
-7.  sa se afiseze userii neblocati din Cluj Napoca
-    select username from "user" where blocat = false and oras = 'Cluj Napoca'
+--7.  sa se afiseze userii neblocati din Cluj Napoca
+    select username from "user" where blocat = false and oras = 'Cluj Napoca';
 
-8. sa se afiseze postarile userilor neblocati din Cluj Napoca care au varsta peste 24 de ani
+--8. sa se afiseze postarile userilor neblocati din Cluj Napoca care au varsta peste 24 de ani
     select id_user, username, mesaj from "user" inner join "postare"
-    on "user".id = "postare".id_user where blocat = false and oras = 'Cluj Napoca' and varsta > 24
+    on "user".id = "postare".id_user where blocat = false and oras = 'Cluj Napoca' and varsta > 24;
 
-9. sa sa afiseze userul cu cele mai multe postari
+--9. sa sa afiseze userul cu cele mai multe postari
     SELECT username,count(postare.id_user) as numar_mesaje
     from "user"
      left join "postare"
@@ -39,22 +39,22 @@
     group by
      "user".id
     order by numar_mesaje DESC
-    limit 1
+    limit 1;
 
-10. sa se afiseze postarile userilor care incep cu numele D si sunt postate intre 1 si 31 martie 2016
+--10. sa se afiseze postarile userilor care incep cu numele D si sunt postate intre 1 si 31 martie 2016
     select id_user, username, mesaj
     from "user"
     join "postare"
     on "user".id = "postare".id_user
-    where "data postare" between '12.03.2016' and '12.05.2016' and username like 'C%'
+    where "data postare" between '12.03.2016' and '12.05.2016' and username like 'C%';
 
-11. sa se afiseze postarile ordonate dupa data postarii descendent, indiferent de user
+--11. sa se afiseze postarile ordonate dupa data postarii descendent, indiferent de user
     select *
     from "postare"
-    order by "data postare" desc
+    order by "data postare" desc;
 
 
-12. sa se stearga postarile userilor sub 18 ani care contin  textul ‘politica’
+--12. sa se stearga postarile userilor sub 18 ani care contin  textul ‘politica’
     DELETE from "postare"
     WHERE mesaj like '%politica%'
     AND id_user in(SELECT id
